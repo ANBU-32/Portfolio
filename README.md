@@ -2,7 +2,7 @@
 
 A modern personal portfolio website built to showcase my projects, skills, and experience as a Full Stack Developer. This site highlights selected work, technical stack, and ways to connect with me.
 
-#Features
+# Features
 
 -Responsive design (mobile + desktop)
 
@@ -20,7 +20,7 @@ A modern personal portfolio website built to showcase my projects, skills, and e
 
 -Modular JavaScript structure
 
-#Sections Included
+# Sections Included
 
 -Hero 
 
@@ -32,7 +32,7 @@ A modern personal portfolio website built to showcase my projects, skills, and e
 
 -Contact
 
-#Acknowledgements
+# Acknowledgements
 
 -Design inspiration from modern developer portfolios
 
