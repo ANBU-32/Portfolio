@@ -1,0 +1,952 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+
+:root {
+  --bg: #0b0f1a;
+  --text: #e6ebf2;
+  --card: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.18);
+}
+
+body.light {
+  --bg: #f5f7fb;
+  --text: #0b0f1a;
+  --card: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.12);
+}
+
+
+/* =========================
+   BASE LAYOUT
+========================= */
+
+body {
+  font-family: system-ui;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+  padding-top: 100px;
+  cursor:none;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+  padding: 70px 24px 70px;
+  position: relative;
+}
+
+.section h2 {
+  margin-bottom: 28px;
+  font-size: 32px;
+}
+
+.section p {
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+
+/* =========================
+   GLASS NAVBAR
+========================= */
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding-top: 10px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+/* base link */
+.nav-links a {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: all .25s ease;
+  overflow: hidden;
+}
+
+/* gradient hover text */
+.nav-links a:hover {
+  color: #7dd3fc;
+  background: rgba(125,211,252,.08);
+  box-shadow: 0 0 0 1px rgba(125,211,252,.25);
+}
+
+/* animated underline bar */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 4px;
+  height: 2px;
+  background: linear-gradient(90deg,#60a5fa,#22d3ee);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(1);
+}
+
+/* active page pill */
+.nav-links a.active {
+  background: linear-gradient(
+    90deg,
+    rgba(96,165,250,.18),
+    rgba(34,211,238,.18)
+  );
+  color: #7dd3fc;
+  box-shadow:
+    inset 0 0 0 1px rgba(125,211,252,.35),
+    0 0 12px rgba(34,211,238,.15);
+}
+
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+  position: relative;
+  height: calc(100vh - 100px);
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-avatar {
+  width: 190px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 26px;
+}
+
+/* background canvas / 3D layer */
+
+
+/* 3D canvas layer */
+#hero3d {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+}
+
+/* text above canvas */
+.hero > *:not(canvas) {
+  position: relative;
+  z-index: 1;
+}
+.hero-advanced {
+  position: relative;
+   min-height: calc(100vh - 100px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(circle at 30% 40%, #4f46e5, transparent 40%),
+    radial-gradient(circle at 70% 60%, #06b6d4, transparent 40%);
+  filter: blur(80px);
+  transition: transform 0.2s linear;
+}
+
+.hero-container {
+  position: relative;
+  max-width: 900px;
+  text-align: center;
+  z-index: 2;
+}
+
+.grad {
+  background: linear-gradient(90deg,#60a5fa,#22d3ee);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  opacity: .7;
+  font-size: 14px;
+}
+
+/* =====================================================
+   ABOUT — SPLIT PANEL STYLE (NON-CENTERED)
+===================================================== */
+
+.about {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* 3D canvas background */
+
+#about3d {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* split layout */
+
+.about-split {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1100px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+
+  align-items: center;
+  padding: 60px 24px;
+}
+
+
+/* ===== feature rail ===== */
+
+.about-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.rail-item {
+  padding: 18px;
+  border-radius: 14px;
+
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+
+  font-weight: 600;
+  text-align: left;
+
+  transition: transform .25s ease;
+}
+
+.rail-item:hover {
+  transform: translateX(8px);
+}
+
+
+/* ===== story panel ===== */
+
+.about-panel {
+  text-align: left;
+  max-width: 640px;
+}
+
+.about-panel h2 {
+  margin-bottom: 18px;
+}
+
+.about-panel p {
+  margin-bottom: 14px;
+  line-height: 1.75;
+}
+
+
+/* ===== mobile ===== */
+
+@media (max-width: 760px) {
+
+  .about-split {
+    grid-template-columns: 1fr;
+  }
+
+  .about-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .rail-item {
+    flex: 1 1 45%;
+  }
+
+}
+/* =====================================================
+   ABOUT — FLOW + SIDE TAG STYLE
+===================================================== */
+
+.about {
+  position: relative;
+  min-height: auto;
+  overflow: hidden;
+}
+
+#about3d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* layout */
+
+.about-flow {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1100px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 60px;
+
+  padding: 40px 24px;
+  align-items: center;
+}
+
+/* left tag column */
+
+.about-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about-tag {
+  padding: 14px 16px;
+  border-radius: 14px;
+
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+
+  font-weight: 600;
+  text-align: left;
+
+  transition: transform .25s ease;
+}
+
+.about-tag:hover {
+  transform: translateX(10px);
+}
+
+/* right content */
+
+.about-main {
+  text-align: left;
+  max-width: 680px;
+}
+
+.about-main h2 {
+  margin-bottom: 20px;
+}
+
+.about-main p {
+  margin-bottom: 16px;
+  line-height: 1.8;
+  opacity: .92;
+}
+
+/* mobile */
+
+@media (max-width: 760px) {
+  .about-flow {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .about-side {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .about-tag {
+    flex: 1 1 45%;
+  }
+}
+
+/* =========================
+   GRID + 3D CARD SYSTEM
+========================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  /* enables visible 3D depth */
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+
+/* =========================
+   GLASS CARDS
+========================= */
+
+.card {
+  padding: 40px;
+  border-radius: 18px;
+
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.2);
+
+  /* 3D setup */
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transform: translateZ(0);
+
+  transition: transform .25s ease, box-shadow .25s ease;
+  will-change: transform;
+}
+
+/* push inner content forward for real depth */
+.card > * {
+  transform: translateZ(30px);
+}
+
+/* hover 3D tilt */
+.card:hover {
+  transform: rotateY(20deg) rotateX(14deg) translateZ(50px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.3);
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  background: linear-gradient(135deg,#66ffff,#60a5fa);
+  box-shadow: 0 8px 25px rgba(96,165,250,.35);
+
+  width: fit-content;
+  align-self: center;
+
+  transition: transform .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+#contact {
+  text-align: center;
+  align-items: center;
+  gap: 16px;
+}
+
+#contact input {
+  width: 420px;
+  max-width: 90%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: none;
+  margin-bottom: 18px;
+}
+
+#contact .btn {
+  min-width: 160px;
+  padding: 14px 28px;
+}
+
+
+/* =========================
+   SCROLL REVEAL ANIMATION
+========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: .8s ease;
+}
+
+.reveal-show {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* =========================
+   SCROLL PROGRESS BAR
+========================= */
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+
+  z-index: 2000;
+
+  background: linear-gradient(90deg,#66ffff,#60a5fa);
+  box-shadow: 0 0 12px rgba(102,255,255,.7);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  text-align: center;
+  padding: 60px;
+  opacity: .7;
+}
+  
+/* CURSOR */
+
+.cursor-ring {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+
+  border: 2px solid #66ffff;
+
+  box-shadow:
+    0 0 8px #66ffff,
+    0 0 18px #60a5fa,
+    inset 0 0 10px rgba(102,255,255,.6);
+
+  transition:
+    width .2s ease,
+    height .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+
+  background: #66ffff;
+
+  box-shadow:
+    0 0 8px #66ffff,
+    0 0 14px #60a5fa;
+}
+
+/* hover grow */
+
+.cursor-hover {
+  width: 54px;
+  height: 54px;
+
+  border-color: #a78bfa;
+
+  box-shadow:
+    0 0 14px #a78bfa,
+    0 0 28px #60a5fa,
+    inset 0 0 14px rgba(167,139,250,.8);
+}
+
+/* click pulse */
+
+.cursor-click {
+  transform: translate(-50%, -50%) scale(0.7);
+}
+ /* PAGE TRANSITION */
+
+ .wave-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    #020617,
+    #0b0f1a,
+    #020617
+  );
+
+  clip-path: circle(0% at 50% 100%);
+  will-change: clip-path;
+}
+#bg-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #020617;
+}
+
+/* ================================
+   CONTACT SECTION — FINAL VERSION
+   Production-ready with accessibility,
+   performance, and mobile upgrades
+================================ */
+
+/* ===== Section Layout ===== */
+
+.contact-section {
+  text-align: center;
+  padding: 120px 20px;
+}
+
+/* Main section title */
+.section-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+/* Subtitle text under title */
+.contact-sub {
+  opacity: 0.7;
+  margin-bottom: 50px;
+}
+
+
+/* ===== Grid Layout =====
+   Responsive auto-fit card grid */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  max-width: 900px;
+  margin: auto;
+}
+
+
+/* ===== Glass Contact Cards ===== */
+
+.contact-card {
+  text-decoration: none;
+  color: #dbeafe;
+
+  padding: 36px 28px;
+  border-radius: 18px;
+
+  /* Glass background with slightly higher opacity for readability */
+  background: rgba(20,30,60,0.45);
+  backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(120,200,255,0.25);
+
+  /* Layered shadows for depth */
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.5),
+    inset 0 0 25px rgba(120,200,255,0.12);
+
+  /* Smooth animation */
+  transition: all 0.25s ease;
+
+  /* Enable better 3D transforms */
+  transform-style: preserve-3d;
+
+  /* Performance hint for browser */
+  will-change: transform, box-shadow;
+
+  /* Needed for gradient overlay effect */
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* ===== Hover Lift Effect (Desktop) ===== */
+
+.contact-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.7),
+    0 0 30px rgba(120,200,255,0.35);
+}
+
+
+/* ===== Keyboard Accessibility =====
+   Shows focus outline when tabbing */
+
+.contact-card:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 4px;
+  transform: translateY(-10px) scale(1.03);
+}
+
+
+/* ===== Mobile Tap Feedback ===== */
+
+.contact-card:active {
+  transform: scale(0.98);
+}
+
+
+/* ===== Subtle Light Sweep Effect =====
+   Adds premium animated shine on hover */
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(120,200,255,0.15),
+    transparent
+  );
+
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+}
+
+
+/* ===== Icon Styling ===== */
+
+.contact-card .icon {
+  font-size: 36px;
+  margin-bottom: 14px;
+
+  /* Softer glow for better display balance */
+  filter: drop-shadow(0 0 6px rgba(56,189,248,0.7));
+}
+
+
+/* ===== Card Text ===== */
+
+.contact-card h3 {
+  margin: 10px 0 6px;
+}
+
+.contact-card p {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+
+/* ===== Copy Email Button (if used) ===== */
+
+.copy-email-btn {
+  margin-top: 40px;
+  padding: 12px 22px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(120,200,255,0.4);
+  background: rgba(20,30,60,0.5);
+  color: #dbeafe;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.copy-email-btn:hover {
+  background: rgba(56,189,248,0.2);
+  box-shadow: 0 0 16px rgba(56,189,248,0.35);
+}
+
+
+/* ===== Mobile Responsive Adjustments ===== */
+
+@media (max-width: 600px) {
+
+  /* Smaller title on mobile */
+  .section-title {
+    font-size: 32px;
+  }
+
+  /* Reduce vertical padding */
+  .contact-section {
+    padding: 90px 16px;
+  }
+
+}
+
+
+/* ===== Accessibility — Reduced Motion =====
+   Disable animations if user prefers less motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-card {
+    transition: none;
+  }
+}
+
+
+/* =========================
+   SKILL SQUARE GLASS CARDS
+========================= */
+
+.skill-square-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 26px;
+  max-width: 1000px;
+  margin: 40px auto;
+}
+
+/* square glass card */
+
+.skill-square {
+  padding: 26px;
+  border-radius: 18px;
+  text-align: center;
+
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+
+  aspect-ratio: 1 / 1;
+
+  transition: transform .25s ease;
+}
+
+.skill-square:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
+/* icon */
+
+.skill-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+.skill-name {
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+/* =========================
+   ROUND SKILL CHART
+========================= */
+
+.circle-chart {
+  width: 110px;
+  height: 110px;
+  margin: auto;
+  position: relative;
+}
+
+.circle-chart svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circle-chart circle {
+  fill: none;
+  stroke-width: 10;
+}
+
+.circle-chart .bg {
+  stroke: rgba(255,255,255,.15);
+}
+
+.circle-chart .fg {
+  stroke: #60a5fa;
+  stroke-linecap: round;
+  stroke-dasharray: 314;
+  stroke-dashoffset: 314;
+  transition: stroke-dashoffset 1.4s ease;
+  filter: drop-shadow(0 0 8px #60a5fa);
+}
+
+/* percent label */
+
+.circle-chart .pct {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
